@@ -18,6 +18,9 @@ public class LogPage {
     private final By loginButton = By.name("login");
     private final By myAccNav = By.xpath("//a[normalize-space()='My Account']");
     private final By errorLogIn = By.cssSelector("ul[class='woocommerce-error'] li");
+    private final By usernameFieldRegister = By.id("reg_email");
+    private final By passwordFieldRegister = By.id("reg_password");
+    private final By registerButton = By.name("register");
     //Constructors
     public LogPage(WebDriver driver) {
         this.driver = driver;
@@ -88,6 +91,47 @@ public class LogPage {
         }catch(Exception e) {
             sc.screenshot("Error on step, assertion error",driver);
             Assert.fail("Step failed: error in assertion on element " + errorLogIn);
+
+        }
+
+    }
+
+    @Step
+    public void inputUsernameRegister(String user) throws Exception {
+        try {
+            wait.waitPresenceOfElementLocated(usernameFieldRegister);
+            driver.findElement(usernameFieldRegister).sendKeys(user);
+            Allure.step("Add " + user + " on Username field");
+            sc.screenshot("Add User",driver);
+        }catch(Exception e) {
+            sc.screenshot("Error on step, not able to locate field",driver);
+            Assert.fail("Step failed: unable to locate element" + usernameFieldRegister);
+        }
+    }
+
+    @Step
+    public void inputPasswordRegister(String psw) throws Exception {
+        try {
+            wait.waitPresenceOfElementLocated(passwordFieldRegister);
+            driver.findElement(passwordFieldRegister).sendKeys(psw);
+            Allure.step("Add " + psw + " on Password field");
+            sc.screenshot("Add Password",driver);
+        }catch(Exception e) {
+            sc.screenshot("Error on step, not able to locate field",driver);
+            Assert.fail("Step failed: unable to locate element" + passwordFieldRegister);
+        }
+    }
+
+    @Step
+    public void clickRegisterBtn() throws Exception{
+        try {
+            wait.waitElementToBeClickable(registerButton);
+            driver.findElement(registerButton).click();
+            Allure.step("Click Register Button");
+            sc.screenshot("Click Register Button",driver);
+        }catch(Exception e) {
+            sc.screenshot("Error on step, not able to locate element",driver);
+            Assert.fail("Step failed: unable to locate element" + registerButton);
 
         }
 

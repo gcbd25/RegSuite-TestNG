@@ -115,4 +115,13 @@ public class ConfigFileReader {
             throw new RuntimeException("Error message on Empty Form not specified in the Configuration.properties file.");
         }
     }
+
+    public String getErrorMsgExistentUser(){
+        String msg = properties.getProperty("msg_ExistentUser");
+        if(msg != null){
+            return msg;
+        } else {
+            throw new RuntimeException("Error message on Existent User not specified in the Configuration.properties file.");
+        }
+    }
 }

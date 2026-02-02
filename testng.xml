@@ -13,4 +13,13 @@
             </class>
         </classes>
     </test>
+    <test name="Register">
+        <classes>
+            <class name="tests.Register">
+                <methods>
+                    <include name="validateRegisterWithExistentUser"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
