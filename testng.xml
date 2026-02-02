@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Regression Test Suite">
+    <test name="Log In">
+        <classes>
+            <class name="tests.LogIn">
+                <methods>
+                    <include name="validateLogInValidCredentials"/>
+                    <include name="validateLogInInvalidPsw"/>
+                    <include name="validateLogInInvalidUser"/>
+                    <include name="validateLogInEmptyPsw"/>
+                    <include name="validateLogInEmptyForm"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
