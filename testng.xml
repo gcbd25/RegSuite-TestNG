@@ -18,6 +18,7 @@
             <class name="tests.Register">
                 <methods>
                     <include name="validateRegisterWithExistentUser"/>
+                    <include name="validateRegisterEmptyForm"/>
                 </methods>
             </class>
         </classes>

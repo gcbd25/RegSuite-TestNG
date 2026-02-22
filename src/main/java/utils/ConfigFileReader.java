@@ -124,4 +124,30 @@ public class ConfigFileReader {
             throw new RuntimeException("Error message on Existent User not specified in the Configuration.properties file.");
         }
     }
+    public String getErrorMsgEmptyRegisterForm(){
+        String msg = properties.getProperty("msg_EmptyRegisterForm");
+        if(msg != null){
+            return msg;
+        } else {
+            throw new RuntimeException("Error message on Empty Register Form is not specified in the Configuration.properties file.");
+        }
+    }
+
+    public String getVeryWeakPsw(){
+        String psw = properties.getProperty("psw_veryWeak");
+        if(psw != null){
+            return psw;
+        } else {
+            throw new RuntimeException("Very Weak Password not specified in the Configuration.properties file.");
+        }
+    }
+
+    public String getErrorMsgVeryWeakPsw(){
+        String msg = properties.getProperty("msg_PasswordVeryWeak");
+        if(msg != null){
+            return msg;
+        } else {
+            throw new RuntimeException("Error message on Very Weak Password is not specified in the Configuration.properties file.");
+        }
+    }
 }

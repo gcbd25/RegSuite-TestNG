@@ -24,4 +24,29 @@ public class Register extends BaseClass {
         loginPage.clickRegisterBtn();
         loginPage.errorMessageInvalidCredential(reader.getErrorMsgExistentUser());
     }
+
+    @Test(priority = 2, testName = "Register-02: Validate user is not able to create account with empty form")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify Register functionality when Register Form is empty")
+    @Story("Register Page")
+    public void validateRegisterEmptyForm() throws Exception {
+        driver.get(reader.getURL());
+        LogPage loginPage = new LogPage(driver);
+        loginPage.clickMyAcc();
+        loginPage.clickRegisterBtn();
+        loginPage.errorMessageInvalidCredential(reader.getErrorMsgEmptyRegisterForm());
+    }
+
+    @Test(priority = 3, testName = "Register-10: Validate password field strength validation for very weak passwords")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Verify Register functionality for password field when user enters a very weak password")
+    @Story("Register Page")
+    public void validateRegisterPasswordFieldVeryWeak() throws Exception {
+        driver.get(reader.getURL());
+        LogPage loginPage = new LogPage(driver);
+        loginPage.clickMyAcc();
+        loginPage.inputPasswordRegister(reader.getVeryWeakPsw());
+        loginPage.errorMessagePswStrength(reader.getErrorMsgVeryWeakPsw());
+        loginPage.registerButtonNotClickable();
+    }
 }

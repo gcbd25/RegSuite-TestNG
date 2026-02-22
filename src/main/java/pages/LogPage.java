@@ -3,6 +3,7 @@ package pages;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import utils.Screenshot;
@@ -12,7 +13,7 @@ public class LogPage {
     private final WebDriver driver;
     private final Screenshot sc;
     private final Waits wait;
-    //Xpaths
+    //Locators
     private final By usernameFieldLogIn = By.id("username");
     private final By passwordFieldLogIn = By.id("password");
     private final By loginButton = By.name("login");
@@ -21,6 +22,7 @@ public class LogPage {
     private final By usernameFieldRegister = By.id("reg_email");
     private final By passwordFieldRegister = By.id("reg_password");
     private final By registerButton = By.name("register");
+    private final By errorStrengthPsw = By.xpath("//div[@class='woocommerce-password-strength short']");
     //Constructors
     public LogPage(WebDriver driver) {
         this.driver = driver;
@@ -134,6 +136,36 @@ public class LogPage {
             Assert.fail("Step failed: unable to locate element" + registerButton);
 
         }
-
     }
+
+    @Step
+    public void errorMessagePswStrength(String errorMsg) throws Exception{
+        try {
+            //driver.findElement(registerButton).sendKeys(Keys.ENTER);
+            wait.waitPresenceOfElementLocated(errorStrengthPsw);
+            Allure.step("Validate error message");
+            Assert.assertTrue(driver.findElement(errorStrengthPsw).getText().contains(errorMsg));
+            sc.screenshot("Error message on password field",driver);
+        }catch(Exception e) {
+            sc.screenshot("Error on step, assertion error",driver);
+            Assert.fail("Step failed: error in assertion on element " + errorLogIn);
+        }
+    }
+
+    @Step
+    public void registerButtonNotClickable() throws Exception{
+        try {
+            if(driver.findElement(registerButton).isEnabled()){
+                Assert.fail();
+            }else {
+                Allure.step("Button not clickable");
+            }
+        }catch(Exception e) {
+            sc.screenshot("Error on step, assertion error",driver);
+            Assert.fail("Step failed: error in assertion on element " + errorLogIn);
+        }
+    }
+
+
+
 }
